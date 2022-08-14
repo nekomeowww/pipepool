@@ -16,5 +16,5 @@ TODOs:
 - [x] Unit tests
 - [ ] Benchmarks
 - [ ] Go doc examples
-- [ ] Integrated with CI/CD
+- [x] Integrated with CI/CD
 - [ ] Documentations
