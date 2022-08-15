@@ -42,9 +42,36 @@ func (pp *PipePool[E, C]) categorize(e E) {
 	pipe.push(PipeElement[E]{element: e})
 }
 
+// Push push element to the pipe pool 向管道池推入元素
 func (pp *PipePool[E, C]) Push(e E) {
 	pp.pool.Acquire()
 	pp.categorize(e)
+}
+
+// Categories returns the categories of the pipe pool 管道池的分类
+func (pp *PipePool[E, C]) Categories() []C {
+	pp.mPipesMutex.Lock()
+	defer pp.mPipesMutex.Unlock()
+
+	categories := make([]C, 0, len(pp.mPipes))
+	for category := range pp.mPipes {
+		categories = append(categories, category)
+	}
+
+	return categories
+}
+
+// PipeQueuedCount returns the number of elements in the pipe pool 管道池中的元素数量
+func (pp *PipePool[E, C]) PipeQueuedCount(category C) int {
+	pp.mPipesMutex.Lock()
+	defer pp.mPipesMutex.Unlock()
+
+	pipe, ok := pp.mPipes[category]
+	if !ok {
+		return 0
+	}
+
+	return pipe.Len()
 }
 
 // Total count of slots of pool 池完整大小
