@@ -22,7 +22,7 @@ jobs:
       # 设定 Go 环境
       - uses: actions/setup-go@v3
         with:
-          go-version: "^1.18.0"
+          go-version: "^1.21.0"
           cache: true
 
       # Get values for cache paths to be used in later steps
@@ -45,7 +45,7 @@ jobs:
         with:
           path: ${{ steps.go-cache-paths.outputs.go-mod }}
           key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
-      
+
       # 代码检查潜在错误
       - name: Vet (Scan for protential mistakes)
         run: |
@@ -61,7 +61,7 @@ jobs:
       # 设定 Go 环境
       - uses: actions/setup-go@v3
         with:
-          go-version: "^1.18.0"
+          go-version: "^1.21.0"
           cache: true
 
       # Get values for cache paths to be used in later steps
@@ -102,7 +102,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v3
         with:
-          go-version: "^1.18.0"
+          go-version: "^1.21.0"
           cache: true
 
       # Get values for cache paths to be used in later steps
